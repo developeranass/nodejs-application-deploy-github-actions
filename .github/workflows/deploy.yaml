@@ -1,9 +1,9 @@
 name: Deploy Nodejs Application to Hostinger
 
-on
+on:
   push: 
     branches: 
-      -main
+      - main
 
 jobs:
   deploy:
@@ -11,7 +11,7 @@ jobs:
 
     steps:
       - name: Checkout Code
-        uses: actions/Checkout@v4
+        uses: actions/checkout@v4
 
       - name: Deploy via SSH
         uses: appleboy/ssh-action@v1.0.3
@@ -19,7 +19,7 @@ jobs:
           host: 13.206.238.153
           username: root
           key: ${{secrets.SSH_KEY}}
-          script:
+          script: |
             cd /root/node-app-deploy-gh-actions
             git pull
             docker compose up -d --build
